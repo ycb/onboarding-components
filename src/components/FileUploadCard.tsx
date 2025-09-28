@@ -17,13 +17,11 @@ interface FileUploadCardProps {
   icon: React.ComponentType<{ className?: string }>;
   onFileUpload?: (type: 'resume' | 'coverLetter' | 'caseStudies', file: File | null) => void;
   onLinkedInUrl?: (url: string) => void;
-  onTextInput?: (text: string) => void;
   required?: boolean;
   optional?: boolean;
   disabled?: boolean;
   currentValue?: string | File;
   onUploadComplete?: (fileId: string, type: string) => void;
-  onUploadError?: (error: string) => void;
 }
 
 export function FileUploadCard({
@@ -33,19 +31,16 @@ export function FileUploadCard({
   icon: Icon,
   onFileUpload,
   onLinkedInUrl,
-  onTextInput,
   required = false,
   optional = false,
   disabled = false,
   currentValue,
-  onUploadComplete,
-  onUploadError
+  onUploadComplete
 }: FileUploadCardProps) {
   const [isDragOver, setIsDragOver] = useState(false);
   const [linkedInUrl, setLinkedInUrl] = useState('');
   const [coverLetterText, setCoverLetterText] = useState(currentValue || '');
   const [uploadedFileId, setUploadedFileId] = useState<string | null>(null);
-  const [uploadedFileContent, setUploadedFileContent] = useState<string | null>(null);
   const [uploadedFileName, setUploadedFileName] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -175,55 +170,6 @@ export function FileUploadCard({
     onUploadComplete?.(`linkedin_${Date.now()}`, 'linkedin');
   }, [linkedInUrl, onLinkedInUrl, onUploadComplete]);
 
-  // Smart submission handler
-  const handleSmartSubmit = useCallback(async () => {
-    if (!hasUploadedFile && !hasTextInput) {
-      onUploadError?.('Please upload a file or enter text');
-      return;
-    }
-
-    try {
-      let contentToProcess: string;
-      let submissionType: string;
-
-      if (hasBoth) {
-        // Combine file content with additional text
-        contentToProcess = `${uploadedFileContent}\n\n--- Additional Context ---\n${coverLetterText}`;
-        submissionType = 'Combined file and text';
-      } else if (hasUploadedFile) {
-        // Use file content only
-        contentToProcess = uploadedFileContent!;
-        submissionType = 'Uploaded file';
-      } else {
-        // Use text only
-        contentToProcess = typeof coverLetterText === 'string' ? coverLetterText : '';
-        submissionType = 'Manual text';
-      }
-
-      console.log(`Processing ${submissionType}:`, { length: contentToProcess.length });
-      
-      // Simulate processing
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      onTextInput?.(contentToProcess);
-      onUploadComplete?.(`${type}_${Date.now()}`, type);
-    } catch (error) {
-      onUploadError?.(error instanceof Error ? error.message : 'Failed to save content');
-    }
-  }, [hasUploadedFile, hasTextInput, hasBoth, uploadedFileContent, coverLetterText, onTextInput, onUploadComplete, onUploadError, type]);
-
-  // Helper functions for UI
-  const getButtonText = () => {
-    if (hasBoth) return 'Combine File & Text';
-    if (hasUploadedFile) return 'Process Uploaded File';
-    if (hasTextInput) return 'Add Cover Letter Text';
-    return 'Add Cover Letter Text';
-  };
-
-  const getButtonDisabled = () => {
-    return !hasUploadedFile && !hasTextInput;
-  };
-
   const renderFileUpload = () => (
     <div className="space-y-4">
       <div
@@ -324,7 +270,7 @@ export function FileUploadCard({
 
   const renderCoverLetterInput = () => (
     <div className="space-y-4">
-      {/* File Upload Section - Use unified component */}
+      {/* File Upload Section */}
       <div
         className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors ${
           isDragOver 
@@ -391,17 +337,6 @@ export function FileUploadCard({
           <span>You have both a file and text. We'll combine them into one submission.</span>
         </div>
       )}
-
-      {/* Only show button when user has typed text or uploaded a file */}
-      {(hasTextInput || hasUploadedFile) && (
-        <Button 
-          onClick={handleSmartSubmit}
-          disabled={getButtonDisabled()}
-          className="w-full"
-        >
-          {getButtonText()}
-        </Button>
-      )}
     </div>
   );
 
@@ -459,7 +394,6 @@ export function FileUploadCard({
                     // Clear all file-related state
                     setUploadedFileId(null);
                     setUploadedFileName(null);
-                    setUploadedFileContent(null);
                     setError(null);
                     // Clear parent state
                     onFileUpload?.(type as 'resume' | 'coverLetter' | 'caseStudies', null as any);

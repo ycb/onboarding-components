@@ -7,9 +7,7 @@ interface ContentUploadModuleProps {
   currentStep: string;
   onFileUpload: (type: 'resume' | 'coverLetter' | 'caseStudies', file: File | null) => void;
   onLinkedInUrl: (url: string) => void;
-  onTextInput: (text: string) => void;
   onUploadComplete: (fileId: string, type: string) => void;
-  onUploadError: (error: string) => void;
   onNextStep: () => void;
   isProcessing?: boolean;
   onboardingData: {
@@ -24,9 +22,7 @@ export function ContentUploadModule({
   currentStep,
   onFileUpload,
   onLinkedInUrl,
-  onTextInput,
   onUploadComplete,
-  onUploadError,
   onNextStep,
   isProcessing = false,
   onboardingData,
@@ -114,7 +110,6 @@ export function ContentUploadModule({
           icon={FileText}
           onFileUpload={onFileUpload}
           onUploadComplete={onUploadComplete}
-          onUploadError={onUploadError}
           currentValue={onboardingData.resume}
         />
         
@@ -125,7 +120,6 @@ export function ContentUploadModule({
           icon={Linkedin}
           onLinkedInUrl={onLinkedInUrl}
           onUploadComplete={onUploadComplete}
-          onUploadError={onUploadError}
           currentValue={linkedinUrl}
         />
         
@@ -134,10 +128,8 @@ export function ContentUploadModule({
           title="Best Cover Letter"
           description=""
           icon={Mail}
-          onTextInput={onTextInput}
           onFileUpload={onFileUpload}
           onUploadComplete={onUploadComplete}
-          onUploadError={onUploadError}
           currentValue={onboardingData.coverLetter}
         />
       </div>
