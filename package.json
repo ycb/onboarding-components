@@ -1,0 +1,43 @@
+{
+  "name": "@ycb/onboarding-components",
+  "version": "1.0.0",
+  "description": "React components for onboarding flows with progress tracking and file uploads",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev": "vite",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["react", "onboarding", "progress", "file-upload", "components"],
+  "author": "YCB",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ycb/onboarding-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ycb/onboarding-components/issues"
+  },
+  "homepage": "https://github.com/ycb/onboarding-components#readme",
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "dependencies": {
+    "@radix-ui/react-progress": "^1.0.3",
+    "@radix-ui/react-slot": "^1.0.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "lucide-react": "^0.263.1",
+    "tailwind-merge": "^1.14.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0",
+    "vite": "^4.0.0",
+    "vite-plugin-dts": "^3.0.0"
+  }
+}
