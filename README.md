@@ -7,7 +7,7 @@ React components for onboarding flows with progress tracking and file uploads.
 - **ProgressBar**: Step-by-step progress tracking with visual indicators
 - **ContentUpload**: File upload cards with drag & drop, text input, and LinkedIn URL support
 - **Drag & Drop**: File upload with visual feedback
-- **Multiple File Types**: Resume, cover letter, case studies, LinkedIn profiles
+- **Multiple File Types**: Resume, cover letter and LinkedIn profile
 - **Validation**: Built-in file type and size validation
 - **Error Handling**: Comprehensive error states and user feedback
 - **Accessibility**: Full keyboard navigation and screen reader support
