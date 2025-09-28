@@ -1,5 +1,5 @@
 export { ProgressBar } from './components/ProgressBar';
-export { ContentUpload } from './components/ContentUpload';
+export { FileUploadCard } from './components/FileUploadCard';
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from './components/ui/card';
 export { Button, buttonVariants } from './components/ui/button';
 export { Input } from './components/ui/input';

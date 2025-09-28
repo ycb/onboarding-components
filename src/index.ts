@@ -1,6 +1,6 @@
 // Components
 export { ProgressBar } from './components/ProgressBar';
-export { ContentUpload } from './components/ContentUpload';
+export { FileUploadCard } from './components/FileUploadCard';
 
 // UI Components
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from './components/ui/card';
