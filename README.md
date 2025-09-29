@@ -2,10 +2,9 @@
 
 React components for onboarding flows with progress tracking and file uploads.
 
-<img width="2560" height="3104" alt="image" src="https://github.com/user-attachments/assets/eef3c7e8-8e4f-4bab-8bfd-18238e3ad346" />
+<img width="2560" height="3296" alt="image" src="https://github.com/user-attachments/assets/f9b8e2fa-6453-4e4b-b4d2-a9393bacffb7" />
 
-<img width="2560" height="1736" alt="image" src="https://github.com/user-attachments/assets/21f76480-2eb0-4ec0-9d96-6482ef3feb57" />
-
+<img width="2560" height="1928" alt="image" src="https://github.com/user-attachments/assets/d0728ebf-fd29-4563-844c-b580f64406d8" />
 
 ## Features
 
