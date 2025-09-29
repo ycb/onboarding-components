@@ -77,8 +77,20 @@
                     }));
                 };
 
-                const handleUploadError = (error, type) => {
-                    console.error('Upload error:', error, type);
+                const handleUploadError = (error) => {
+                    console.error('Upload error:', error);
+                };
+
+                const handleLinkedInUrl = (url) => {
+                    console.log('LinkedIn URL:', url);
+                };
+
+                const handleUploadComplete = (fileId, type) => {
+                    console.log('Upload complete:', fileId, type);
+                };
+
+                const handleNextStep = () => {
+                    console.log('Next step clicked');
                 };
 
                 return React.createElement('div', {
@@ -111,9 +123,20 @@
                         }, 'Try out the interactive components below. These are the actual React components with full functionality.'),
                         React.createElement(ContentUploadModule, {
                             key: 'contentUpload',
+                            currentStep: 'content',
                             onFileUpload: handleFileUpload,
+                            onLinkedInUrl: handleLinkedInUrl,
                             onTextInput: handleTextInput,
-                            onUploadError: handleUploadError
+                            onUploadComplete: handleUploadComplete,
+                            onUploadError: handleUploadError,
+                            onNextStep: handleNextStep,
+                            isProcessing: false,
+                            onboardingData: {
+                                resume: null,
+                                coverLetter: '',
+                                coverLetterFile: null
+                            },
+                            linkedinUrl: ''
                         })
                     ])
                 ]);
