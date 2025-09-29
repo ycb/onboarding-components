@@ -1,5 +1,11 @@
 # Onboarding Components
 
+Demo here: https://ycb.github.io/onboarding-components/
+
+<img width="2520" height="3976" alt="image" src="https://github.com/user-attachments/assets/665ddd20-41e5-4b38-87ef-c7d27d73d016" />
+
+<img width="2520" height="2608" alt="image" src="https://github.com/user-attachments/assets/70a97f21-db19-4643-8fbf-8b5f50829c19" />
+
 React components for onboarding flows with progress tracking and file uploads.
 
 ## Features
