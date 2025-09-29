@@ -9,308 +9,51 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="./dist/index.umd.js"></script>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            background-color: #f9fafb;
-            margin: 0;
-            padding: 0;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            background-color: white;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #1f2937;
-            margin-bottom: 0.5rem;
-        }
-        .header p {
-            font-size: 1.125rem;
-            color: #4b5563;
-            margin-bottom: 1.5rem;
-        }
-        .header .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-        }
-        .header .button {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.375rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s ease-in-out;
-        }
-        .header .button-primary {
-            background-color: #2563eb;
-            color: white;
-        }
-        .header .button-primary:hover {
-            background-color: #1d4ed8;
-        }
-        .header .button-secondary {
-            background-color: white;
-            color: #2563eb;
-            border: 1px solid #2563eb;
-        }
-        .header .button-secondary:hover {
-            background-color: #eff6ff;
-        }
-        .component-demo {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 2rem;
-        }
-        .component-demo h2 {
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 1rem;
-        }
-        .component-demo p {
-            color: #4b5563;
-            margin-bottom: 1.5rem;
-        }
-        .results {
-            background-color: #f3f4f6;
-            border-radius: 0.375rem;
-            padding: 1rem;
-            margin-top: 1.5rem;
-        }
-        .results h3 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 0.5rem;
-        }
-        .results pre {
-            background-color: #1f2937;
-            color: #f9fafb;
-            padding: 1rem;
-            border-radius: 0.375rem;
-            overflow-x: auto;
-            font-size: 0.875rem;
-        }
-        .footer-section {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #e5e7eb;
-            color: #6b7280;
-            font-size: 0.875rem;
-        }
-        .footer-section a {
-            color: #2563eb;
-            text-decoration: none;
-        }
-        .footer-section a:hover {
-            text-decoration: underline;
-        }
-    </style>
 </head>
 <body>
     <div id="root"></div>
     <script type="text/babel">
-        const { useState } = React;
         const { ContentUploadModule } = OnboardingComponents;
 
         function App() {
-            const [uploadedFiles, setUploadedFiles] = useState([]);
-            const [textInputs, setTextInputs] = useState({});
-            const [showResults, setShowResults] = useState(false);
-
-            const handleFileUpload = (file, type) => {
-                console.log('File uploaded:', file, type);
-                const newFile = {
-                    id: Date.now(),
-                    name: file.name,
-                    size: file.size,
-                    type: file.type,
-                    uploadType: type,
-                    timestamp: new Date().toISOString()
-                };
-                setUploadedFiles(prev => [...prev, newFile]);
-                setShowResults(true);
-            };
-
-            const handleTextInput = (text, type) => {
-                console.log('Text input:', text, type);
-                setTextInputs(prev => ({
-                    ...prev,
-                    [type]: {
-                        text: text,
-                        timestamp: new Date().toISOString()
-                    }
-                }));
-                setShowResults(true);
-            };
-
-            const handleUploadError = (error, type) => {
-                console.error(`Upload error for ${type}:`, error);
-                alert(`Upload error for ${type}: ${error.message}`);
-            };
-
-            const copyInstallCommand = () => {
-                const command = 'npm install @ycb/onboarding-components';
-                navigator.clipboard.writeText(command).then(() => {
-                    alert('Install command copied to clipboard!');
-                });
-            };
-
             return React.createElement('div', {
                 className: 'min-h-screen bg-gray-50 p-8'
             }, [
-                // Header
                 React.createElement('div', {
                     key: 'header',
-                    className: 'header'
+                    className: 'text-center mb-8 bg-white p-8 rounded-lg shadow-sm'
                 }, [
                     React.createElement('h1', {
-                        key: 'title'
+                        key: 'title',
+                        className: 'text-4xl font-bold text-gray-900 mb-4'
                     }, 'Onboarding Components'),
                     React.createElement('p', {
-                        key: 'subtitle'
-                    }, 'A collection of reusable React components for user onboarding flows'),
-                    React.createElement('div', {
-                        key: 'buttons',
-                        className: 'buttons'
-                    }, [
-                        React.createElement('a', {
-                            key: 'github',
-                            href: 'https://github.com/ycb/onboarding-components',
-                            target: '_blank',
-                            className: 'button button-primary'
-                        }, [
-                            React.createElement('svg', {
-                                key: 'icon',
-                                className: 'w-5 h-5 mr-2',
-                                fill: 'currentColor',
-                                viewBox: '0 0 20 20'
-                            }, React.createElement('path', {
-                                fillRule: 'evenodd',
-                                d: 'M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z',
-                                clipRule: 'evenodd'
-                            })),
-                            'View on GitHub'
-                        ]),
-                        React.createElement('button', {
-                            key: 'copy',
-                            onClick: copyInstallCommand,
-                            className: 'button button-secondary'
-                        }, [
-                            React.createElement('svg', {
-                                key: 'icon',
-                                className: 'w-5 h-5 mr-2',
-                                fill: 'none',
-                                stroke: 'currentColor',
-                                viewBox: '0 0 24 24'
-                            }, React.createElement('path', {
-                                strokeLinecap: 'round',
-                                strokeLinejoin: 'round',
-                                strokeWidth: 2,
-                                d: 'M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z'
-                            })),
-                            'Copy Install Command'
-                        ])
-                    ])
+                        key: 'subtitle',
+                        className: 'text-lg text-gray-600'
+                    }, 'A collection of reusable React components for user onboarding flows')
                 ]),
-
-                // Live Demo Section
                 React.createElement('div', {
                     key: 'demo',
-                    className: 'component-demo'
+                    className: 'bg-white p-8 rounded-lg shadow-sm'
                 }, [
                     React.createElement('h2', {
-                        key: 'title'
+                        key: 'title',
+                        className: 'text-2xl font-bold text-gray-900 mb-4'
                     }, 'Live Demo'),
                     React.createElement('p', {
-                        key: 'description'
-                    }, 'Try out the interactive components below. These are the actual React components with full functionality including file upload success states, validation, and error handling.'),
-                    
-                    // Actual ContentUploadModule Component
+                        key: 'description',
+                        className: 'text-gray-600 mb-6'
+                    }, 'Try out the interactive components below.'),
                     React.createElement(ContentUploadModule, {
                         key: 'contentUpload',
-                        onFileUpload: handleFileUpload,
-                        onTextInput: handleTextInput,
-                        onUploadError: handleUploadError
+                        onFileUpload: (file, type) => console.log('File uploaded:', file, type),
+                        onTextInput: (text, type) => console.log('Text input:', text, type),
+                        onUploadError: (error, type) => console.error('Upload error:', error, type)
                     })
-                ]),
-
-                // Results Section
-                showResults && React.createElement('div', {
-                    key: 'results',
-                    className: 'component-demo'
-                }, [
-                    React.createElement('h2', {
-                        key: 'title'
-                    }, 'Results'),
-                    React.createElement('p', {
-                        key: 'description'
-                    }, 'Here\'s what you\'ve uploaded and entered:'),
-                    React.createElement('div', {
-                        key: 'results',
-                        className: 'results'
-                    }, [
-                        React.createElement('h3', {
-                            key: 'files-title'
-                        }, 'Uploaded Files'),
-                        React.createElement('pre', {
-                            key: 'files-data'
-                        }, JSON.stringify(uploadedFiles, null, 2)),
-                        React.createElement('h3', {
-                            key: 'text-title',
-                            className: 'mt-4'
-                        }, 'Text Inputs'),
-                        React.createElement('pre', {
-                            key: 'text-data'
-                        }, JSON.stringify(textInputs, null, 2))
-                    ])
-                ]),
-
-                // Footer
-                React.createElement('div', {
-                    key: 'footer',
-                    className: 'footer-section'
-                }, [
-                    React.createElement('p', {
-                        key: 'text'
-                    }, 'Made with ❤️ for better user onboarding experiences'),
-                    React.createElement('p', {
-                        key: 'links'
-                    }, [
-                        React.createElement('a', {
-                            key: 'license',
-                            href: 'https://github.com/ycb/onboarding-components/blob/main/LICENSE',
-                            target: '_blank'
-                        }, 'MIT License'),
-                        ' | ',
-                        React.createElement('a', {
-                            key: 'issues',
-                            href: 'https://github.com/ycb/onboarding-components/issues',
-                            target: '_blank'
-                        }, 'Report Issues'),
-                        ' | ',
-                        React.createElement('a', {
-                            key: 'discussions',
-                            href: 'https://github.com/ycb/onboarding-components/discussions',
-                            target: '_blank'
-                        }, 'Discussions')
-                    ])
                 ])
             ]);
         }
 
-        // Render the app
         ReactDOM.render(React.createElement(App), document.getElementById('root'));
     </script>
 </body>
