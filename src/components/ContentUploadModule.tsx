@@ -1,13 +1,15 @@
-import { Card } from "./ui/card";
-import { Button } from "./ui/button";
-import { CheckCircle, ArrowRight, FileText, Linkedin, Mail } from "lucide-react";
-import { FileUploadCard } from "./FileUploadCard";
+import { Card } from './ui/card';
+import { Button } from './ui/button';
+import { FileUploadCard } from './FileUploadCard';
+import { CheckCircle, ArrowRight, FileText, Linkedin, Mail } from 'lucide-react';
 
 interface ContentUploadModuleProps {
   currentStep: string;
   onFileUpload: (type: 'resume' | 'coverLetter' | 'caseStudies', file: File | null) => void;
   onLinkedInUrl: (url: string) => void;
+  onTextInput: (text: string) => void;
   onUploadComplete: (fileId: string, type: string) => void;
+  onUploadError: (error: string) => void;
   onNextStep: () => void;
   isProcessing?: boolean;
   onboardingData: {
@@ -22,7 +24,9 @@ export function ContentUploadModule({
   currentStep,
   onFileUpload,
   onLinkedInUrl,
+  onTextInput,
   onUploadComplete,
+  onUploadError,
   onNextStep,
   isProcessing = false,
   onboardingData,
@@ -110,6 +114,7 @@ export function ContentUploadModule({
           icon={FileText}
           onFileUpload={onFileUpload}
           onUploadComplete={onUploadComplete}
+          onUploadError={onUploadError}
           currentValue={onboardingData.resume}
         />
         
@@ -120,6 +125,7 @@ export function ContentUploadModule({
           icon={Linkedin}
           onLinkedInUrl={onLinkedInUrl}
           onUploadComplete={onUploadComplete}
+          onUploadError={onUploadError}
           currentValue={linkedinUrl}
         />
         
@@ -128,8 +134,10 @@ export function ContentUploadModule({
           title="Best Cover Letter"
           description=""
           icon={Mail}
+          onTextInput={onTextInput}
           onFileUpload={onFileUpload}
           onUploadComplete={onUploadComplete}
+          onUploadError={onUploadError}
           currentValue={onboardingData.coverLetter}
         />
       </div>
@@ -139,7 +147,7 @@ export function ContentUploadModule({
           size="lg" 
           onClick={onNextStep}
           disabled={!onboardingData.resume || (!onboardingData.coverLetter && !onboardingData.coverLetterFile)}
-          className="px-8 py-3 text-lg"
+          className="px-8 py-3 text-lg bg-blue-500 hover:bg-blue-600 text-white"
         >
           {isProcessing ? (
             <>
