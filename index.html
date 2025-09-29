@@ -3,555 +3,486 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Onboarding Components - Demo</title>
+    <title>Onboarding Components Test</title>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .demo-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        .component-demo {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e5e7eb;
-        }
-        .step-indicator {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        .step {
-            display: flex;
-            align-items: center;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            margin-right: 0.5rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-        .step.completed {
-            background-color: #10b981;
-            color: white;
-        }
-        .step.current {
-            background-color: #3b82f6;
-            color: white;
-        }
-        .step.pending {
-            background-color: #f3f4f6;
-            color: #6b7280;
-        }
-        .step-connector {
-            width: 2rem;
-            height: 2px;
-            background-color: #e5e7eb;
-            margin: 0 0.5rem;
-        }
-        .upload-card {
-            border: 2px dashed #d1d5db;
-            border-radius: 0.75rem;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        .upload-card:hover {
-            border-color: #3b82f6;
-            background-color: #f8fafc;
-        }
-        .upload-card.dragover {
-            border-color: #3b82f6;
-            background-color: #eff6ff;
-        }
-        .file-icon {
-            width: 3rem;
-            height: 3rem;
-            margin: 0 auto 1rem;
-            color: #6b7280;
-        }
-        .upload-button {
-            background-color: #3b82f6;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            border: none;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.2s;
-        }
-        .upload-button:hover {
-            background-color: #2563eb;
-        }
-        .upload-button:disabled {
-            background-color: #9ca3af;
-            cursor: not-allowed;
-        }
-        .file-input {
-            display: none;
-        }
-        .progress-bar {
-            width: 100%;
-            height: 0.5rem;
-            background-color: #e5e7eb;
-            border-radius: 0.25rem;
-            overflow: hidden;
-            margin: 1rem 0;
-        }
-        .progress-fill {
-            height: 100%;
-            background-color: #3b82f6;
-            transition: width 0.3s ease;
-        }
-        .demo-section {
-            margin: 3rem 0;
-        }
-        .demo-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 1rem;
-        }
-        .demo-description {
-            color: #6b7280;
-            margin-bottom: 2rem;
-        }
-        .code-block {
-            background-color: #f8fafc;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-            font-size: 0.875rem;
-            overflow-x: auto;
-            margin: 1rem 0;
-        }
-        .status-badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-        .status-success {
-            background-color: #dcfce7;
-            color: #166534;
-        }
-        .status-warning {
-            background-color: #fef3c7;
-            color: #92400e;
-        }
-        .status-error {
-            background-color: #fee2e2;
-            color: #991b1b;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background-color: #f9fafb;
         }
     </style>
 </head>
-<body class="bg-gray-50">
-    <div class="demo-container">
-        <!-- Header -->
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4">Onboarding Components</h1>
-            <p class="text-xl text-gray-600 mb-6">React components for onboarding flows with progress tracking and file uploads</p>
-            <div class="flex justify-center gap-4">
-                <a href="https://github.com/ycb/onboarding-components" class="bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors">
-                    📚 View on GitHub
-                </a>
-                <button onclick="copyInstallCommand()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
-                    📦 Copy Install Command
-                </button>
-            </div>
-        </div>
-
-        <!-- Installation -->
-        <div class="component-demo">
-            <h2 class="text-2xl font-semibold mb-4">Installation</h2>
-            <div class="code-block">
-npm install @ycb/onboarding-components
-            </div>
-            <p class="text-sm text-gray-600 mt-2">
-                <strong>Peer Dependencies:</strong> react, react-dom, @radix-ui/react-progress, @radix-ui/react-slot, class-variance-authority, clsx, lucide-react, tailwind-merge
-            </p>
-        </div>
-
-        <!-- Progress Bar Demo -->
-        <div class="component-demo">
-            <h2 class="text-2xl font-semibold mb-4">ProgressBar Component</h2>
-            <p class="text-gray-600 mb-6">Step-by-step progress tracking with visual indicators</p>
-            
-            <div id="progress-demo"></div>
-            
-            <div class="mt-6">
-                <h3 class="text-lg font-medium mb-3">Usage Example</h3>
-                <div class="code-block">
-const steps = [
-  { id: 'welcome', label: 'Welcome', status: 'completed' },
-  { id: 'upload', label: 'Content', status: 'current' },
-  { id: 'review', label: 'Review', status: 'pending' }
-];
-
-&lt;ProgressBar steps={steps} currentStep="upload" /&gt;
-                </div>
-            </div>
-        </div>
-
-        <!-- Content Upload Demo -->
-        <div class="component-demo">
-            <h2 class="text-2xl font-semibold mb-4">ContentUpload Component</h2>
-            <p class="text-gray-600 mb-6">File upload cards with drag & drop, text input, and LinkedIn URL support</p>
-            
-            <div id="upload-demo"></div>
-            
-            <div class="mt-6">
-                <h3 class="text-lg font-medium mb-3">Usage Example</h3>
-                <div class="code-block">
-const config = {
-  type: 'resume',
-  title: 'Resume',
-  description: 'Upload your resume to get started',
-  icon: FileText,
-  required: true
-};
-
-&lt;ContentUpload 
-  config={config}
-  onFileUpload={(file) => console.log('File uploaded:', file)}
-  onUploadComplete={(fileId, type) => console.log('Upload complete:', fileId)}
-  onUploadError={(error) => console.error('Upload error:', error)}
-/&gt;
-                </div>
-            </div>
-        </div>
-
-        <!-- Features -->
-        <div class="component-demo">
-            <h2 class="text-2xl font-semibold mb-4">Features</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <h3 class="text-lg font-medium mb-3">ProgressBar Features</h3>
-                    <ul class="space-y-2 text-gray-600">
-                        <li>✅ Step-by-step progress tracking</li>
-                        <li>✅ Visual status indicators</li>
-                        <li>✅ Customizable styling</li>
-                        <li>✅ Accessibility support</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-medium mb-3">ContentUpload Features</h3>
-                    <ul class="space-y-2 text-gray-600">
-                        <li>✅ Drag & drop file upload</li>
-                        <li>✅ Multiple file types support</li>
-                        <li>✅ Built-in validation</li>
-                        <li>✅ Error handling</li>
-                        <li>✅ LinkedIn URL support</li>
-                        <li>✅ Text input option</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- API Reference -->
-        <div class="component-demo">
-            <h2 class="text-2xl font-semibold mb-4">API Reference</h2>
-            
-            <div class="mb-6">
-                <h3 class="text-lg font-medium mb-3">ProgressBar Props</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
-                        <thead>
-                            <tr class="border-b">
-                                <th class="text-left py-2">Prop</th>
-                                <th class="text-left py-2">Type</th>
-                                <th class="text-left py-2">Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b">
-                                <td class="py-2 font-mono">steps</td>
-                                <td class="py-2">ProgressStep[]</td>
-                                <td class="py-2">Array of step objects</td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="py-2 font-mono">currentStep</td>
-                                <td class="py-2">string</td>
-                                <td class="py-2">ID of current step</td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="py-2 font-mono">className</td>
-                                <td class="py-2">string</td>
-                                <td class="py-2">Additional CSS classes</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div>
-                <h3 class="text-lg font-medium mb-3">ContentUpload Props</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
-                        <thead>
-                            <tr class="border-b">
-                                <th class="text-left py-2">Prop</th>
-                                <th class="text-left py-2">Type</th>
-                                <th class="text-left py-2">Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b">
-                                <td class="py-2 font-mono">config</td>
-                                <td class="py-2">UploadConfig</td>
-                                <td class="py-2">Upload configuration object</td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="py-2 font-mono">onFileUpload</td>
-                                <td class="py-2">(file: File) => void</td>
-                                <td class="py-2">File upload handler</td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="py-2 font-mono">onUploadComplete</td>
-                                <td class="py-2">(fileId: string, type: string) => void</td>
-                                <td class="py-2">Upload completion handler</td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="py-2 font-mono">onUploadError</td>
-                                <td class="py-2">(error: string) => void</td>
-                                <td class="py-2">Error handler</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="text-center mt-12 py-8 border-t">
-            <p class="text-gray-600 mb-4">Made with ❤️ for better onboarding experiences</p>
-            <div class="flex justify-center gap-4">
-                <a href="https://github.com/ycb/onboarding-components" class="text-blue-600 hover:text-blue-800">GitHub</a>
-                <span class="text-gray-300">•</span>
-                <a href="https://www.npmjs.com/package/@ycb/onboarding-components" class="text-blue-600 hover:text-blue-800">NPM</a>
-                <span class="text-gray-300">•</span>
-                <span class="text-gray-600">MIT License</span>
-            </div>
-        </div>
-    </div>
-
+<body>
+    <div id="root"></div>
+    
     <script type="text/babel">
-        const { useState, useEffect } = React;
-
-        // Progress Bar Component
-        function ProgressBar({ steps, currentStep, className = "" }) {
-            return (
-                <div className={`step-indicator ${className}`}>
-                    {steps.map((step, index) => (
-                        <React.Fragment key={step.id}>
-                            <div className={`step ${step.status}`}>
-                                {step.status === 'completed' && '✓ '}
-                                {step.label}
-                            </div>
-                            {index < steps.length - 1 && <div className="step-connector" />}
-                        </React.Fragment>
-                    ))}
-                </div>
-            );
-        }
-
-        // Content Upload Component
-        function ContentUpload({ config, onFileUpload, onUploadComplete, onUploadError, className = "" }) {
-            const [isDragging, setIsDragging] = useState(false);
-            const [uploadedFile, setUploadedFile] = useState(null);
-            const [uploadProgress, setUploadProgress] = useState(0);
-            const [status, setStatus] = useState('idle');
-
-            const handleDragOver = (e) => {
-                e.preventDefault();
-                setIsDragging(true);
-            };
-
-            const handleDragLeave = (e) => {
-                e.preventDefault();
-                setIsDragging(false);
-            };
-
-            const handleDrop = (e) => {
-                e.preventDefault();
-                setIsDragging(false);
-                const files = e.dataTransfer.files;
-                if (files.length > 0) {
-                    handleFileUpload(files[0]);
-                }
-            };
-
-            const handleFileSelect = (e) => {
-                const files = e.target.files;
-                if (files.length > 0) {
-                    handleFileUpload(files[0]);
-                }
-            };
-
-            const handleFileUpload = (file) => {
-                setStatus('uploading');
-                setUploadProgress(0);
-                
-                // Simulate upload progress
-                const interval = setInterval(() => {
-                    setUploadProgress(prev => {
-                        if (prev >= 100) {
-                            clearInterval(interval);
-                            setStatus('success');
-                            setUploadedFile(file);
-                            onFileUpload && onFileUpload(file);
-                            onUploadComplete && onUploadComplete('file-id', config.type);
-                            return 100;
-                        }
-                        return prev + 10;
-                    });
-                }, 100);
-            };
-
-            const resetUpload = () => {
-                setUploadedFile(null);
-                setUploadProgress(0);
-                setStatus('idle');
-            };
-
-            return (
-                <div className={`upload-card ${isDragging ? 'dragover' : ''} ${className}`}
-                     onDragOver={handleDragOver}
-                     onDragLeave={handleDragLeave}
-                     onDrop={handleDrop}
-                     onClick={() => document.getElementById('file-input').click()}>
+        const { useState } = React;
+        
+        // Lucide React icons as SVG strings
+        const CheckCircle = () => React.createElement('svg', {
+            width: '32',
+            height: '32',
+            viewBox: '0 0 24 24',
+            fill: 'none',
+            stroke: 'currentColor',
+            strokeWidth: '2',
+            strokeLinecap: 'round',
+            strokeLinejoin: 'round',
+            className: 'w-8 h-8 text-green-500'
+        }, [
+            React.createElement('path', { key: 'path1', d: 'M22 11.08V12a10 10 0 1 1-5.93-9.14' }),
+            React.createElement('polyline', { key: 'path2', points: '22,4 12,14.01 9,11.01' })
+        ]);
+        
+        const FileText = () => React.createElement('svg', {
+            width: '24',
+            height: '24',
+            viewBox: '0 0 24 24',
+            fill: 'none',
+            stroke: 'currentColor',
+            strokeWidth: '2',
+            strokeLinecap: 'round',
+            strokeLinejoin: 'round',
+            className: 'w-6 h-6 text-gray-600'
+        }, [
+            React.createElement('path', { key: 'path1', d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' }),
+            React.createElement('polyline', { key: 'path2', points: '14,2 14,8 20,8' }),
+            React.createElement('line', { key: 'line1', x1: '16', y1: '13', x2: '8', y2: '13' }),
+            React.createElement('line', { key: 'line2', x1: '16', y1: '17', x2: '8', y2: '17' }),
+            React.createElement('polyline', { key: 'path3', points: '10,9 9,9 8,9' })
+        ]);
+        
+        const Linkedin = () => React.createElement('svg', {
+            width: '24',
+            height: '24',
+            viewBox: '0 0 24 24',
+            fill: 'none',
+            stroke: 'currentColor',
+            strokeWidth: '2',
+            strokeLinecap: 'round',
+            strokeLinejoin: 'round',
+            className: 'w-6 h-6 text-gray-600'
+        }, [
+            React.createElement('path', { key: 'path1', d: 'M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z' }),
+            React.createElement('rect', { key: 'rect1', x: '2', y: '9', width: '4', height: '12' }),
+            React.createElement('circle', { key: 'circle1', cx: '4', cy: '4', r: '2' })
+        ]);
+        
+        const Mail = () => React.createElement('svg', {
+            width: '24',
+            height: '24',
+            viewBox: '0 0 24 24',
+            fill: 'none',
+            stroke: 'currentColor',
+            strokeWidth: '2',
+            strokeLinecap: 'round',
+            strokeLinejoin: 'round',
+            className: 'w-6 h-6 text-gray-600'
+        }, [
+            React.createElement('path', { key: 'path1', d: 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z' }),
+            React.createElement('polyline', { key: 'path2', points: '22,6 12,13 2,6' })
+        ]);
+        
+        const Upload = () => React.createElement('svg', {
+            width: '48',
+            height: '48',
+            viewBox: '0 0 24 24',
+            fill: 'none',
+            stroke: 'currentColor',
+            strokeWidth: '2',
+            strokeLinecap: 'round',
+            strokeLinejoin: 'round',
+            className: 'w-12 h-12 text-gray-400'
+        }, [
+            React.createElement('path', { key: 'path1', d: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4' }),
+            React.createElement('polyline', { key: 'path2', points: '7,10 12,5 17,10' }),
+            React.createElement('line', { key: 'line1', x1: '12', y1: '15', x2: '12', y2: '5' })
+        ]);
+        
+        const ArrowRight = () => React.createElement('svg', {
+            width: '20',
+            height: '20',
+            viewBox: '0 0 24 24',
+            fill: 'none',
+            stroke: 'currentColor',
+            strokeWidth: '2',
+            strokeLinecap: 'round',
+            strokeLinejoin: 'round',
+            className: 'ml-2 w-5 h-5'
+        }, [
+            React.createElement('line', { key: 'line1', x1: '5', y1: '12', x2: '19', y2: '12' }),
+            React.createElement('polyline', { key: 'path1', points: '12,5 19,12 12,19' })
+        ]);
+        
+        function App() {
+            return React.createElement('div', {
+                className: 'min-h-screen bg-gray-50 p-8'
+            }, [
+                React.createElement('div', {
+                    key: 'container',
+                    className: 'max-w-4xl mx-auto space-y-8'
+                }, [
+                    // Progress Bar
+                    React.createElement('div', {
+                        key: 'progress',
+                        className: 'p-6 border rounded-lg shadow-sm bg-white'
+                    }, [
+                        React.createElement('div', {
+                            key: 'container',
+                            className: 'flex items-center justify-center relative'
+                        }, [
+                            React.createElement('h3', {
+                                key: 'title',
+                                className: 'font-semibold text-gray-900 absolute left-0'
+                            }, 'Progress'),
+                            React.createElement('div', {
+                                key: 'steps',
+                                className: 'flex items-center space-x-8'
+                            }, [
+                                // Step 1: Welcome
+                                React.createElement('div', {
+                                    key: 'welcome',
+                                    className: 'flex items-center gap-3'
+                                }, [
+                                    React.createElement('div', {
+                                        key: 'icon',
+                                        className: 'relative'
+                                    }, React.createElement(CheckCircle)),
+                                    React.createElement('span', {
+                                        key: 'label',
+                                        className: 'text-sm font-medium text-gray-900'
+                                    }, 'Welcome')
+                                ]),
+                                // Connector line
+                                React.createElement('div', {
+                                    key: 'connector1',
+                                    className: 'w-12 h-0.5 bg-gray-200'
+                                }),
+                                // Step 2: Upload
+                                React.createElement('div', {
+                                    key: 'upload',
+                                    className: 'flex items-center gap-3'
+                                }, [
+                                    React.createElement('div', {
+                                        key: 'icon',
+                                        className: 'relative'
+                                    }, React.createElement('div', {
+                                        className: 'w-8 h-8 rounded-full border-2 border-blue-500 bg-blue-500 flex items-center justify-center'
+                                    }, React.createElement('div', {
+                                        className: 'w-3 h-3 rounded-full bg-white'
+                                    }))),
+                                    React.createElement('span', {
+                                        key: 'label',
+                                        className: 'text-sm font-medium text-blue-600'
+                                    }, 'Content')
+                                ]),
+                                // Connector line
+                                React.createElement('div', {
+                                    key: 'connector2',
+                                    className: 'w-12 h-0.5 bg-gray-200'
+                                }),
+                                // Step 3: Review
+                                React.createElement('div', {
+                                    key: 'review',
+                                    className: 'flex items-center gap-3'
+                                }, [
+                                    React.createElement('div', {
+                                        key: 'icon',
+                                        className: 'relative'
+                                    }, React.createElement('div', {
+                                        className: 'w-8 h-8 rounded-full border-2 border-gray-300 bg-white'
+                                    })),
+                                    React.createElement('span', {
+                                        key: 'label',
+                                        className: 'text-sm font-medium text-gray-900'
+                                    }, 'Review')
+                                ])
+                            ])
+                        ])
+                    ]),
                     
-                    <input
-                        id="file-input"
-                        type="file"
-                        className="file-input"
-                        onChange={handleFileSelect}
-                        accept=".pdf,.doc,.docx,.txt"
-                    />
+                    // Title
+                    React.createElement('div', {
+                        key: 'title',
+                        className: 'text-center space-y-4'
+                    }, [
+                        React.createElement('h2', {
+                            key: 'heading',
+                            className: 'text-3xl font-bold text-foreground'
+                        }, 'Add Your Content')
+                    ]),
                     
-                    {uploadedFile ? (
-                        <div className="text-center">
-                            <div className="file-icon">📄</div>
-                            <h3 className="text-lg font-medium text-gray-900 mb-2">
-                                {uploadedFile.name}
-                            </h3>
-                            <p className="text-sm text-gray-600 mb-4">
-                                {config.description}
-                            </p>
-                            <div className="flex gap-2 justify-center">
-                                <button 
-                                    onClick={resetUpload}
-                                    className="upload-button bg-gray-600 hover:bg-gray-700"
-                                >
-                                    Change File
-                                </button>
-                                <span className="status-badge status-success">
-                                    ✓ Uploaded
-                                </span>
-                            </div>
-                        </div>
-                    ) : (
-                        <div className="text-center">
-                            <div className="file-icon">📁</div>
-                            <h3 className="text-lg font-medium text-gray-900 mb-2">
-                                {config.title}
-                            </h3>
-                            <p className="text-sm text-gray-600 mb-4">
-                                {config.description}
-                            </p>
-                            
-                            {status === 'uploading' && (
-                                <div className="mb-4">
-                                    <div className="progress-bar">
-                                        <div 
-                                            className="progress-fill" 
-                                            style={{ width: `${uploadProgress}%` }}
-                                        />
-                                    </div>
-                                    <p className="text-sm text-gray-600">
-                                        Uploading... {uploadProgress}%
-                                    </p>
-                                </div>
-                            )}
-                            
-                            <button 
-                                className="upload-button"
-                                disabled={status === 'uploading'}
-                            >
-                                {status === 'uploading' ? 'Uploading...' : 'Choose File'}
-                            </button>
-                            
-                            <p className="text-xs text-gray-500 mt-2">
-                                or drag and drop your file here
-                            </p>
-                        </div>
-                    )}
-                </div>
-            );
+                    // File Upload Cards
+                    React.createElement('div', {
+                        key: 'uploads',
+                        className: 'flex flex-col gap-6'
+                    }, [
+                        // Resume Card
+                        React.createElement('div', {
+                            key: 'resume',
+                            className: 'border rounded-lg shadow-sm bg-white'
+                        }, [
+                            React.createElement('div', {
+                                key: 'header',
+                                className: 'pb-4 -mx-6 -mt-6 px-6 pt-6'
+                            }, [
+                                React.createElement('div', {
+                                    key: 'content',
+                                    className: 'flex items-center gap-3'
+                                }, [
+                                    React.createElement('div', {
+                                        key: 'icon',
+                                        className: 'w-12 h-12 rounded-lg flex items-center justify-center bg-gray-100'
+                                    }, React.createElement(FileText)),
+                                    React.createElement('div', {
+                                        key: 'text',
+                                        className: 'flex-1'
+                                    }, [
+                                        React.createElement('h3', {
+                                            key: 'title',
+                                            className: 'text-lg text-gray-900'
+                                        }, 'Resume')
+                                    ])
+                                ])
+                            ]),
+                            React.createElement('div', {
+                                key: 'content',
+                                className: 'p-6'
+                            }, [
+                                React.createElement('div', {
+                                    key: 'dropzone',
+                                    className: 'border-2 border-dashed rounded-lg p-6 text-center border-gray-300 hover:border-gray-400'
+                                }, [
+                                    React.createElement('div', {
+                                        key: 'icon',
+                                        className: 'flex justify-center mb-6'
+                                    }, React.createElement(Upload)),
+                                    React.createElement('p', {
+                                        key: 'text',
+                                        className: 'text-gray-600 mb-6'
+                                    }, 'Drag and drop your file here, or'),
+                                    React.createElement('div', {
+                                        key: 'button',
+                                        className: 'mb-6'
+                                    }, React.createElement('button', {
+                                        className: 'inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 cursor-pointer'
+                                    }, 'Choose File')),
+                                    React.createElement('p', {
+                                        key: 'info',
+                                        className: 'text-sm text-gray-500'
+                                    }, 'PDF, DOCX, TXT, MD (max 5MB)')
+                                ]),
+                                React.createElement('div', {
+                                    key: 'divider',
+                                    className: 'relative my-4'
+                                }, [
+                                    React.createElement('div', {
+                                        key: 'line',
+                                        className: 'absolute inset-0 flex items-center'
+                                    }, React.createElement('div', {
+                                        className: 'w-full border-t border-gray-300'
+                                    })),
+                                    React.createElement('div', {
+                                        key: 'text',
+                                        className: 'relative flex justify-center text-sm'
+                                    }, React.createElement('span', {
+                                        className: 'px-2 bg-white text-gray-500'
+                                    }, 'OR'))
+                                ]),
+                                React.createElement('div', {
+                                    key: 'text-input',
+                                    className: 'space-y-2'
+                                }, [
+                                    React.createElement('label', {
+                                        key: 'label',
+                                        className: 'text-sm font-medium text-gray-700'
+                                    }, 'Paste resume content directly for fast and reliable processing'),
+                                    React.createElement('textarea', {
+                                        key: 'textarea',
+                                        placeholder: 'Paste your resume content here...',
+                                        rows: 3,
+                                        className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                                    })
+                                ])
+                            ])
+                        ]),
+                        
+                        // LinkedIn Card
+                        React.createElement('div', {
+                            key: 'linkedin',
+                            className: 'border rounded-lg shadow-sm bg-white'
+                        }, [
+                            React.createElement('div', {
+                                key: 'header',
+                                className: 'pb-4 -mx-6 -mt-6 px-6 pt-6'
+                            }, [
+                                React.createElement('div', {
+                                    key: 'content',
+                                    className: 'flex items-center gap-3'
+                                }, [
+                                    React.createElement('div', {
+                                        key: 'icon',
+                                        className: 'w-12 h-12 rounded-lg flex items-center justify-center bg-gray-100'
+                                    }, React.createElement(Linkedin)),
+                                    React.createElement('div', {
+                                        key: 'text',
+                                        className: 'flex-1'
+                                    }, [
+                                        React.createElement('h3', {
+                                            key: 'title',
+                                            className: 'text-lg text-gray-900'
+                                        }, 'LinkedIn Profile'),
+                                        React.createElement('p', {
+                                            key: 'description',
+                                            className: 'text-gray-600'
+                                        }, 'Enter your LinkedIn profile URL to import work history and skills')
+                                    ])
+                                ])
+                            ]),
+                            React.createElement('div', {
+                                key: 'content',
+                                className: 'p-6'
+                            }, [
+                                React.createElement('div', {
+                                    key: 'input-group',
+                                    className: 'space-y-2'
+                                }, [
+                                    React.createElement('label', {
+                                        key: 'label',
+                                        className: 'text-sm font-medium text-gray-700'
+                                    }, 'LinkedIn Profile URL'),
+                                    React.createElement('div', {
+                                        key: 'input-row',
+                                        className: 'flex gap-2'
+                                    }, [
+                                        React.createElement('input', {
+                                            key: 'input',
+                                            type: 'url',
+                                            placeholder: 'https://linkedin.com/in/yourprofile',
+                                            className: 'flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                                        }),
+                                        React.createElement('button', {
+                                            key: 'button',
+                                            className: 'px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600'
+                                        }, 'Connect')
+                                    ])
+                                ])
+                            ])
+                        ]),
+                        
+                        // Cover Letter Card
+                        React.createElement('div', {
+                            key: 'coverLetter',
+                            className: 'border rounded-lg shadow-sm bg-white'
+                        }, [
+                            React.createElement('div', {
+                                key: 'header',
+                                className: 'pb-4 -mx-6 -mt-6 px-6 pt-6'
+                            }, [
+                                React.createElement('div', {
+                                    key: 'content',
+                                    className: 'flex items-center gap-3'
+                                }, [
+                                    React.createElement('div', {
+                                        key: 'icon',
+                                        className: 'w-12 h-12 rounded-lg flex items-center justify-center bg-gray-100'
+                                    }, React.createElement(Mail)),
+                                    React.createElement('div', {
+                                        key: 'text',
+                                        className: 'flex-1'
+                                    }, [
+                                        React.createElement('h3', {
+                                            key: 'title',
+                                            className: 'text-lg text-gray-900'
+                                        }, 'Best Cover Letter')
+                                    ])
+                                ])
+                            ]),
+                            React.createElement('div', {
+                                key: 'content',
+                                className: 'p-6'
+                            }, [
+                                React.createElement('div', {
+                                    key: 'dropzone',
+                                    className: 'border-2 border-dashed rounded-lg p-6 text-center border-gray-300 hover:border-gray-400'
+                                }, [
+                                    React.createElement('div', {
+                                        key: 'icon',
+                                        className: 'flex justify-center mb-6'
+                                    }, React.createElement(Upload)),
+                                    React.createElement('p', {
+                                        key: 'text',
+                                        className: 'text-gray-600 mb-6'
+                                    }, 'Drag and drop your file here, or'),
+                                    React.createElement('div', {
+                                        key: 'button',
+                                        className: 'mb-6'
+                                    }, React.createElement('button', {
+                                        className: 'inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 cursor-pointer'
+                                    }, 'Choose File')),
+                                    React.createElement('p', {
+                                        key: 'info',
+                                        className: 'text-sm text-gray-500'
+                                    }, 'PDF, DOCX, TXT, MD (max 5MB)')
+                                ]),
+                                React.createElement('div', {
+                                    key: 'divider',
+                                    className: 'relative my-4'
+                                }, [
+                                    React.createElement('div', {
+                                        key: 'line',
+                                        className: 'absolute inset-0 flex items-center'
+                                    }, React.createElement('div', {
+                                        className: 'w-full border-t border-gray-300'
+                                    })),
+                                    React.createElement('div', {
+                                        key: 'text',
+                                        className: 'relative flex justify-center text-sm'
+                                    }, React.createElement('span', {
+                                        className: 'px-2 bg-white text-gray-500'
+                                    }, 'OR'))
+                                ]),
+                                React.createElement('div', {
+                                    key: 'text-input',
+                                    className: 'space-y-2'
+                                }, [
+                                    React.createElement('label', {
+                                        key: 'label',
+                                        className: 'text-sm font-medium text-gray-700'
+                                    }, 'Or paste cover letter content directly for fast and reliable processing'),
+                                    React.createElement('textarea', {
+                                        key: 'textarea',
+                                        placeholder: 'Paste your best cover letter content here...',
+                                        rows: 3,
+                                        className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                                    })
+                                ])
+                            ])
+                        ])
+                    ]),
+                    
+                    // Next Button
+                    React.createElement('div', {
+                        key: 'button',
+                        className: 'text-center'
+                    }, [
+                        React.createElement('button', {
+                            key: 'next',
+                            className: 'px-8 py-3 text-lg bg-blue-500 text-white rounded-md hover:bg-blue-600 inline-flex items-center'
+                        }, [
+                            'Review & Approve',
+                            React.createElement(ArrowRight)
+                        ])
+                    ])
+                ])
+            ]);
         }
-
-        // Demo App
-        function DemoApp() {
-            const [currentStep, setCurrentStep] = useState('upload');
-            
-            const steps = [
-                { id: 'welcome', label: 'Welcome', status: 'completed' },
-                { id: 'upload', label: 'Content', status: currentStep === 'upload' ? 'current' : 'pending' },
-                { id: 'review', label: 'Review', status: 'pending' }
-            ];
-
-            const uploadConfig = {
-                type: 'resume',
-                title: 'Resume',
-                description: 'Upload your resume to get started',
-                required: true
-            };
-
-            const handleFileUpload = (file) => {
-                console.log('File uploaded:', file);
-            };
-
-            const handleUploadComplete = (fileId, type) => {
-                console.log('Upload complete:', fileId, type);
-                setCurrentStep('review');
-            };
-
-            const handleUploadError = (error) => {
-                console.error('Upload error:', error);
-            };
-
-            return (
-                <div>
-                    <ProgressBar steps={steps} currentStep={currentStep} />
-                    <ContentUpload 
-                        config={uploadConfig}
-                        onFileUpload={handleFileUpload}
-                        onUploadComplete={handleUploadComplete}
-                        onUploadError={handleUploadError}
-                    />
-                </div>
-            );
-        }
-
-        // Render demos
-        ReactDOM.render(<DemoApp />, document.getElementById('progress-demo'));
-        ReactDOM.render(<DemoApp />, document.getElementById('upload-demo'));
-    </script>
-
-    <script>
-        function copyInstallCommand() {
-            navigator.clipboard.writeText('npm install @ycb/onboarding-components');
-            alert('Install command copied to clipboard!');
-        }
+        
+        // Render the app
+        ReactDOM.render(React.createElement(App), document.getElementById('root'));
     </script>
 </body>
 </html>
