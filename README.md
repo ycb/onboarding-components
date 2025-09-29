@@ -2,6 +2,11 @@
 
 React components for onboarding flows with progress tracking and file uploads.
 
+<img width="2560" height="3104" alt="image" src="https://github.com/user-attachments/assets/eef3c7e8-8e4f-4bab-8bfd-18238e3ad346" />
+
+<img width="2560" height="1736" alt="image" src="https://github.com/user-attachments/assets/21f76480-2eb0-4ec0-9d96-6482ef3feb57" />
+
+
 ## Features
 
 - **ProgressBar**: Step-by-step progress tracking with visual indicators
